@@ -2,7 +2,6 @@
 
 from warnings import warn
 
-from sympy.core.compatibility import u
 from sympy import Add, Mul, Pow, Integer, exp, sqrt, conjugate
 from sympy.functions.special.tensor_functions import KroneckerDelta
 
@@ -110,16 +109,16 @@ class FermionOp(Operator):
         if self.is_annihilation:
             return pform
         else:
-            return pform**prettyForm(u('\u2020'))
-            
+            return pform**prettyForm(u'\u2020')
+
 class MultiFermionOp(Operator):
     """Fermionic operators that satisfy the commutation relations:
     for discrete label for modes:
-        {a(k1), Dagger(a(k2))} == KroneckerDelta(k1, k2). 
-    
+        {a(k1), Dagger(a(k2))} == KroneckerDelta(k1, k2).
+
     for continuous label for modes:
         {a(k1), Dagger(a(k2))} == DiracDelta(k1 - k2).
-        
+
     and in both cases:
         {a(k1), a(k2)} == {Dagger(a(k1)), Dagger(a(k2))} == 0.
 
@@ -135,17 +134,17 @@ class MultiFermionOp(Operator):
 
     normalization : ['discrete', 'continuous']
         'discrete' for KroneckerDelta function,
-        'continuous' for DiracDelta function. 
+        'continuous' for DiracDelta function.
         should be specified in any case.
 
     annihilation : bool
         A bool that indicates if the bosonic operator is an annihilation (True,
         default value) or creation operator (False)
-    
-        
+
+
     Examples
     ========
-    
+
     >>> from sympsi import Dagger, Commutator
     >>> from sympsi.fermion import MultiFermionOp
     >>> w1, w2 = symbols("w1, w2")
@@ -165,21 +164,21 @@ class MultiFermionOp(Operator):
     0
     >>> AntiCommutator(Dagger(b1), Dagger(b2)).doit()
     0
-    
-    """    
-    
+
+    """
+
     @property
     def free_symbols(self):
         return self.args[1].free_symbols
-    
+
     @property
     def name(self):
         return self.args[0]
-    
+
     @property
     def mode(self):
         return self.args[1]
-        
+
     @property
     def normalization_type(self):
         return str(self.args[3])
@@ -199,7 +198,7 @@ class MultiFermionOp(Operator):
         if str(args[2]) not in ['discrete', 'continuous']:
             print("discrete or continuous: %s" % args[2])
             raise ValueError('The third argument should be "discrete" or "continuous", got %s' % args)
-        
+
         if len(args) == 3:
             args = (args[0], args[1], str(args[2]), Integer(1))
 
@@ -216,7 +215,7 @@ class MultiFermionOp(Operator):
             return Integer(0)
 
         return None
-    
+
 
     def _eval_anticommutator_FermionOp(self, other, **hints):
         if self.name == other.name:
@@ -258,7 +257,7 @@ class MultiFermionOp(Operator):
         if self.is_annihilation:
             return pform
         else:
-            return pform**prettyForm(u('\u2020'))
+            return pform**prettyForm(u'\u2020')
 
 
 class FermionFockKet(Ket):

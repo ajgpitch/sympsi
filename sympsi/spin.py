@@ -5,7 +5,6 @@ from __future__ import print_function, division
 from sympy import (Add, binomial, cos, exp, Expr, factorial, I, Integer, Mul,
                    pi, Rational, S, sin, simplify, sqrt, Sum, symbols, sympify,
                    Tuple, Dummy)
-from sympy.core.compatibility import u, unicode
 from sympy.core.evaluate import global_evaluate
 from sympy.matrices import zeros
 from sympy.printing.pretty.stringpict import prettyForm, stringPict
@@ -78,15 +77,15 @@ class SpinOpBase(object):
         return self.args[0]
 
     def _print_contents(self, printer, *args):
-        return '%s%s' % (unicode(self.name), self._coord)
+        return '%s%s' % (self.name, self._coord)
 
     def _print_contents_pretty(self, printer, *args):
-        a = stringPict(unicode(self.name))
+        a = stringPict(self.name)
         b = stringPict(self._coord)
         return self._print_subscript_pretty(a, b)
 
     def _print_contents_latex(self, printer, *args):
-        return r'%s_%s' % ((unicode(self.name), self._coord))
+        return r'%s_%s' % ((self.name, self._coord))
 
     def _represent_base(self, basis, **options):
         j = options.get('j', Rational(1, 2))
@@ -404,8 +403,8 @@ class J2Op(SpinOpBase, HermitianOperator):
         return self._represent_base(basis, **options)
 
     def _print_contents_pretty(self, printer, *args):
-        a = prettyForm(unicode(self.name))
-        b = prettyForm(u('2'))
+        a = prettyForm(self.name)
+        b = prettyForm('2')
         return a**b
 
     def _print_contents_latex(self, printer, *args):
@@ -501,7 +500,7 @@ class Rotation(UnitaryOperator):
 
     def _print_operator_name_pretty(self, printer, *args):
         if printer._use_unicode:
-            return prettyForm(u('\u211B') + u(' '))
+            return prettyForm(u'\u211B' + ' ')
         else:
             return prettyForm("R ")
 
