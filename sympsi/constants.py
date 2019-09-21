@@ -2,6 +2,7 @@
 
 from __future__ import print_function, division
 
+from sympy.core.compatibility import with_metaclass
 from sympy.core.numbers import NumberSymbol
 from sympy.core.singleton import Singleton
 from sympy.printing.pretty.stringpict import prettyForm
@@ -23,7 +24,7 @@ __all__ = [
 ]
 
 
-class HBar(Singleton, metaclass=NumberSymbol):
+class HBar(with_metaclass(Singleton, NumberSymbol)):
     """Reduced Plank's constant in numerical and symbolic form [1]_.
 
     Examples
