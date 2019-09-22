@@ -75,6 +75,9 @@ def test_pauli_operators_multiplication():
     assert sy * sy == 1
     assert sz * sz == 1
 
+    #FIXME ajgpitch 2019-09-22
+    # The LHS of these don't seem to evaluated
+    # Probably really easy to fix if one understands anything about sympsi
     assert sx * sy == I * sz
     assert sy * sz == I * sx
     assert sz * sx == I * sy
