@@ -227,7 +227,7 @@ x \
 """
     assert pretty(expr) == ascii_str
     assert upretty(expr) == ucode_str
-    assert (latex(expr) == r'x^{\dag}' or latex(expr) == r'x^{\dagger}')
+    assert latex(expr) == r'x^{\dagger}'
     sT(expr, "Dagger(Symbol('x'))")
 
 
@@ -839,7 +839,7 @@ def test_big_expr():
     #FIXME: ajgpitch 2019-09-22
     # Not sure if this should be considered an error
     assert latex(e1) == \
-        r'{\left(J_z\right)^{2}}\otimes \left({A^{\dag} + B^{\dag}}\right) \left\{\left(DifferentialOperator\left(\frac{d}{d x} f{\left (x \right )},f{\left (x \right )}\right)^{\dag}\right)^{3},A^{\dag} + B^{\dag}\right\} \left({\left\langle 1,0\right|} + {\left\langle 1,1\right|}\right) \left({\left|0,0\right\rangle } + {\left|1,-1\right\rangle }\right)'
+        r'{\left(J_z\right)^{2}}\otimes \left({A^{\dagger} + B^{\dagger}}\right) \left\{\left(DifferentialOperator\left(\frac{d}{d x} f{\left (x \right )},f{\left (x \right )}\right)^{\dagger}\right)^{3},A^{\dagger} + B^{\dagger}\right\} \left({\left\langle 1,0\right|} + {\left\langle 1,1\right|}\right) \left({\left|0,0\right\rangle } + {\left|1,-1\right\rangle }\right)'
     # This is what gets spat out
     #latex(e1) = '{J_z^{2}}\otimes \left({A^{\dagger} + B^{\dagger}}\right) \left\{\left(DifferentialOperator\left(\frac{d}{d x} f{\left(x \right)},f{\left(x \right)}\right)^{\dagger}\right)^{3},A^{\dagger} + B^{\dagger}\right\} \left({\left\langle 1,0\right|} + {\left\langle 1,1\right|}\right) \left({\left|0,0\right\rangle } + {\left|1,-1\right\rangle }\right)'
     # Just brackets missing round the first J_z
@@ -860,7 +860,7 @@ def test_big_expr():
     assert pretty(e2) == ascii_str
     assert upretty(e2) == ucode_str
     assert latex(e2) == \
-        r'\left[\left(J_z\right)^{2},A + B\right] \left\{\left(E\right)^{-2},D^{\dag} C^{\dag}\right\} \left[J^2,J_z\right]'
+        r'\left[\left(J_z\right)^{2},A + B\right] \left\{\left(E\right)^{-2},D^{\dagger} C^{\dagger}\right\} \left[J^2,J_z\right]'
     sT(e2, "Mul(Commutator(Pow(JzOp(Symbol('J')), Integer(2)),Add(Operator(Symbol('A')), Operator(Symbol('B')))), AntiCommutator(Pow(Operator(Symbol('E')), Integer(-2)),Mul(Dagger(Operator(Symbol('D'))), Dagger(Operator(Symbol('C'))))), Commutator(J2Op(Symbol('J')),JzOp(Symbol('J'))))")
     assert str(e3) == \
         "Wigner3j(1, 2, 3, 4, 5, 6)*[Dagger(B) + A,C + D]x(-J2 + Jz)*|1,0><1,1|*(|1,0,j1=1,j2=1> + |1,1,j1=1,j2=1>)x|1,-1,j1=1,j2=1>"
@@ -881,7 +881,7 @@ def test_big_expr():
     assert pretty(e3) == ascii_str
     assert upretty(e3) == ucode_str
     assert latex(e3) == \
-        r'\left(\begin{array}{ccc} 1 & 3 & 5 \\ 2 & 4 & 6 \end{array}\right) {\left[B^{\dag} + A,C + D\right]}\otimes \left({- J^2 + J_z}\right) {\left|1,0\right\rangle }{\left\langle 1,1\right|} \left({{\left|1,0,j_{1}=1,j_{2}=1\right\rangle } + {\left|1,1,j_{1}=1,j_{2}=1\right\rangle }}\right)\otimes {{\left|1,-1,j_{1}=1,j_{2}=1\right\rangle }}'
+        r'\left(\begin{array}{ccc} 1 & 3 & 5 \\ 2 & 4 & 6 \end{array}\right) {\left[B^{\dagger} + A,C + D\right]}\otimes \left({- J^2 + J_z}\right) {\left|1,0\right\rangle }{\left\langle 1,1\right|} \left({{\left|1,0,j_{1}=1,j_{2}=1\right\rangle } + {\left|1,1,j_{1}=1,j_{2}=1\right\rangle }}\right)\otimes {{\left|1,-1,j_{1}=1,j_{2}=1\right\rangle }}'
     sT(e3, "Mul(Wigner3j(Integer(1), Integer(2), Integer(3), Integer(4), Integer(5), Integer(6)), TensorProduct(Commutator(Add(Dagger(Operator(Symbol('B'))), Operator(Symbol('A'))),Add(Operator(Symbol('C')), Operator(Symbol('D')))), Add(Mul(Integer(-1), J2Op(Symbol('J'))), JzOp(Symbol('J')))), OuterProduct(JzKet(Integer(1),Integer(0)),JzBra(Integer(1),Integer(1))), TensorProduct(Add(JzKetCoupled(Integer(1),Integer(0),Tuple(Integer(1), Integer(1)),Tuple(Tuple(Integer(1), Integer(2), Integer(1)))), JzKetCoupled(Integer(1),Integer(1),Tuple(Integer(1), Integer(1)),Tuple(Tuple(Integer(1), Integer(2), Integer(1))))), JzKetCoupled(Integer(1),Integer(-1),Tuple(Integer(1), Integer(1)),Tuple(Tuple(Integer(1), Integer(2), Integer(1))))))")
     assert str(e4) == '(C(1)*C(2)+F**2)*(L2([0, oo))+H)'
     ascii_str = \
@@ -904,4 +904,4 @@ def test_big_expr():
 def _test_sho1d():
     ad = RaisingOp('a')
     assert pretty(ad) == u' \u2020\na '
-    assert latex(ad) == 'a^{\\dag}'
+    assert latex(ad) == 'a^{\\dagger}'

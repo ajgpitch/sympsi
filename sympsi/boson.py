@@ -111,7 +111,7 @@ class BosonOp(Operator):
         if self.is_annihilation:
             return r'{%s}' % str(self.name)
         else:
-            return r'{{%s}^\dag}' % str(self.name)
+            return r'{{%s}^\dagger}' % str(self.name)
 
     def _print_contents(self, printer, *args):
         if self.is_annihilation:
@@ -269,7 +269,7 @@ class MultiBosonOp(BosonOp):
         if self.is_annihilation:
             return r'{%s_{%s}}' % (str(self.name), str(self.mode))
         else:
-            return r'{{%s_{%s}}^\dag}' % (str(self.name), str(self.mode))
+            return r'{{%s_{%s}}^\dagger}' % (str(self.name), str(self.mode))
 
     def _print_contents(self, printer, *args):
         if self.is_annihilation:
